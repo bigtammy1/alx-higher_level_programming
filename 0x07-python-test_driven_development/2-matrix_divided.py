@@ -1,40 +1,32 @@
 #!/usr/bin/python3
 """
-A module for a function that divides all elements of a matrix.
+    This module contains only one function
+    This module returns a new matrix after dividing by a number.
+    ``matrix_divided(matrix, div)``
 """
 
 
 def matrix_divided(matrix, div):
-    """
-
-    Args:
-        matrix:
-        div:
-
-    Returns:
-
-    """
-    if matrix == []:
-        return []
-    if matrix is None:
-        raise TypeError("matrix must be a matrix "
-                        "(list of lists) of integers/floats")
-    for i in matrix:
-        for j in i:
-            if type(j) not in [int, float]:
-                raise TypeError("matrix must be a matrix "
-                                "(list of lists) of integers/floats")
-
-    sizes = list(map(lambda x: len(x), matrix))
-    if (len(set(sizes))) != 1:
+    import decimal
+    error_msg = "matrix must be a matrix (list of lists) of integers/floats"
+    if type(matrix) is not list:
+        raise TypeError(error_msg)
+    len_rows = []
+    row_count = 0
+    for row in matrix:
+        if type(row) is not list:
+            raise TypeError(error_msg)
+        len_rows.append(len(row))
+        for element in row:
+            if type(element) not in [int, float]:
+                raise TypeError(error_msg)
+        row_count += 1
+    if len(set(len_rows)) > 1:
         raise TypeError("Each row of the matrix must have the same size")
-
     if type(div) not in [int, float]:
         raise TypeError("div must be a number")
-    if div == 0:
+    if int(div) == 0:
         raise ZeroDivisionError("division by zero")
-
-    result = list(map(lambda x:
-                      list(map(lambda y:
-                               round(y / div, 2), x)), matrix))
-    return result
+    new_matrix = list(map(lambda row:
+                          list(map(lambda x: round(x/div, 2), row)), matrix))
+    return new_matrix
