@@ -1,18 +1,16 @@
 #!/usr/bin/python3
-"""Module containing the ``add_attribute`` function definition.
-"""
+"""Defines a function that adds attributes to objects."""
 
 
-def add_attribute(obj, name, value):
-    """adds an attribute to an object.
+def add_attribute(obj, att, value):
+    """Add a new attribute to an object if possible.
     Args:
-        obj (object): object we want to extend
-        name (str): name of attribute to add
-        value (any type): value of attribute to add
+        obj (any): The object to add an attribute to.
+        att (str): The name of the attribute to add to obj.
+        value (any): The value of att.
+    Raises:
+        TypeError: If the attribute cannot be added.
     """
-    if type(obj) in (int, float, str, list, tuple, set, dict):
+    if not hasattr(obj, "__dict__"):
         raise TypeError("can't add new attribute")
-    elif hasattr(obj, name):
-        raise TypeError("can't add new attribute")
-    else:
-        setattr(obj, name, value)
+    setattr(obj, att, value)
