@@ -1,4 +1,3 @@
 #!/bin/bash
-# This script takes in a URL, sends a request to the URL, and displays the size of the body of the response in bytes
-curl -s $1 | wc -c
-
+# a script to check the size of the body of the response
+curl -i $1 | grep Content-Length | tail -c 4
