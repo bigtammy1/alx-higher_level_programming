@@ -1,3 +1,3 @@
-#####JavaScript - Web scraping
+##### JavaScript - Web scraping
 
 Readme for this project
